@@ -132,14 +132,25 @@ public class PR124main {
 
     // Mètode per trobar la posició d'un estudiant al fitxer segons el número de registre
     private long trobarPosicioRegistre(RandomAccessFile raf, int registreBuscat) throws IOException {
-        // *************** CODI PRÀCTICA **********************/
-        return 0; // Substitueix pel peu
+        int posicio=0;
+        raf.seek(0);
+        while (raf.getFilePointer() < raf.length()){
+            int registreSeleccionat = raf.readInt();
+            if (registreSeleccionat==registreBuscat){
+                return posicio;
+            }else {
+                posicio = ID_SIZE+NAME_MAX_BYTES+GRADE_SIZE;
+            }
+        }
+        return -1;
     }
 
     // Operacions amb fitxers
     // Mètode que manipula el fitxer i llista tots els estudiants (independent per al test)
     public void llistarEstudiantsFitxer() throws IOException {
-        // *************** CODI PRÀCTICA **********************/
+        File arxiu = new File(getFilePath());
+
+        RandomAccessFile raf = new RandomAccessFile(getFilePath(), "r");
     }
 
     // Mètode que manipula el fitxer i afegeix l'estudiant
