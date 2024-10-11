@@ -1,8 +1,7 @@
 package com.project;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+
 import com.project.excepcions.IOFitxerExcepcio;
 import com.project.objectes.PR121hashmap;
 
@@ -33,6 +32,28 @@ public class PR121mainEscriu {
     }
 
     public static void serialitzarHashMap(PR121hashmap hashMap) throws IOFitxerExcepcio {
-        // *************** CODI PRÀCTICA **********************/
+        File arxiu = new File(getFilePath());
+        if (!arxiu.exists()){
+            try {
+                if (arxiu.createNewFile()){
+                    System.out.println("L'arxiu s'ha generat correctament");
+                }
+            } catch (IOException e) {
+                throw new IOFitxerExcepcio("No s'ha pogut crear correctament");
+            }
+        }else {
+            System.out.println("L'arxiu ja existeix");
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(arxiu);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(hashMap);
+
+            System.out.println("L'arxiu s'ha creat correctament");
+        } catch (IOException e) {
+            throw new IOFitxerExcepcio("No s'ha pogut obrir l'arxiu d'escriptura");
+        }
+
     }
 }
