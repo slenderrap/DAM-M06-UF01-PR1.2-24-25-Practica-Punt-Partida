@@ -99,7 +99,7 @@ public class PR120mainPersonesHashmap {
                     nom = dis.readUTF();
                     edat = dis.readInt();
                     System.out.println(nom+": " + edat + " anys" );
-}
+                }
 
             } catch (IOException e) {
 
